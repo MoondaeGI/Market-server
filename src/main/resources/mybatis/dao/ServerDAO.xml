@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dev.market.server.model.dao.ServerDAO">
+    <select id="selectServerStateInfoList"
+            resultType="com.dev.market.server.model.vo.ServerStateInfoVo">
+        /* 서버 상태 테이블 내의 모든 내용을 가져옴 */
+        SELECT TITLE        AS serverStateTitle
+             , CONTENT      AS serverStateContent
+             , SERVER_STATE AS serverStateEnum
+             , REG_DT       AS regDt
+        FROM TB_SERVER_STATE;
+    </select>
+
+    <select id="selectServerStateInfo"
+            parameterType="com.dev.market.server.model.dto.ServerStateSelectRequestDTO"
+            resultType="com.dev.market.server.model.vo.ServerStateInfoVo">
+        /* 서버 상태 테이블에서 서버 상태 번호를 받아 아이템을 출력 */
+        SELECT TITLE        AS serverStateTitle
+             , CONTENT      AS serverStateContent
+             , SERVER_STATE AS serverStateEnum
+             , REG_DT       AS regDt
+        FROM TB_SERVER_STATE
+        WHERE SERVER_STATE_NO = #{serverStateNo};
+    </select>
+
+    <insert id="insertServerStateInfo"
+            parameterType="com.dev.market.server.model.dto.ServerStateInsertRequestDTO">
+        INSERT INTO TB_SERVER_STATE (TITLE, CONTENT, SERVER_STATE)
+            VALUE (#{serverStateTitle}, #{serverStateContent}, #{serverStateEnum});
+    </insert>
+
+    <update id="updateServerStateInfo"
+            parameterType="com.dev.market.server.model.dto.ServerStateUpdateRequestDTO">
+        UPDATE TB_SERVER_STATE
+        SET TITLE        = #{serverStateTitle}
+          , CONTENT      = #{serverStateContent}
+          , SERVER_STATE = #{serverStateEnum}
+          , MOD_DT       = NOW()
+        WHERE SERVER_STATE_NO = #{serverStateNo};
+    </update>
+</mapper>
