@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dev.market.notice.model.dao.NoticeDAO">
+    <select id="selectNoticeInfoList"
+            resultType="com.dev.market.notice.model.vo.NoticeInfoVO">
+        /* 공지사항 테이블 내의 모든 데이터를 조회 */
+        SELECT TITLE AS noticeTitle
+             , CONTENT AS noticeContent
+             , OPEN_YN AS openYNEnum
+             , REG_DT AS regDt
+        FROM TB_NOTICE;
+    </select>
+
+    <select id="selectNoticeInfo"
+            parameterType="com.dev.market.notice.model.dto.NoticeSelectRequestDTO"
+            resultType="com.dev.market.notice.model.vo.NoticeInfoVO">
+        /* 공지사항 테이블에서 공지사항 번호를 이용해 아이템 출력 */
+        SELECT TITLE AS noticeTitle
+             , CONTENT AS noticeContent
+             , OPEN_YN AS openYNEnum
+             , REG_DT AS regDt
+        FROM TB_NOTICE
+        WHERE NOTICE_NO = #{noticeNo};
+    </select>
+
+    <insert id="insertNoticeInfo"
+            parameterType="com.dev.market.notice.model.dto.NoticeInsertRequestDTO">
+        /* 공지사항 테이블에 새로운 아이템을 작성 */
+        INSERT INTO TB_NOTICE (TITLE, CONTENT, OPEN_YN)
+            VALUE (#{noticeTitle}, #{noticeContent}, #{openYNEnum});
+    </insert>
+
+    <update id="updateNoticeInfo"
+            parameterType="com.dev.market.notice.model.dto.NoticeUpdateRequestDTO">
+        /* 공지사항 테이블의 아이템 수정 */
+        UPDATE TB_NOTICE
+        SET TITLE = #{noticeTitle}
+          , CONTENT = #{noticeContent}
+          , OPEN_YN = #{openYNEnum}
+          , MOD_DY = NOW()
+        WHERE NOTICE_NO = #{noticeNo};
+    </update>
+
+    <select id="searchNoticeInfoFromTitle"
+            parameterType="com.dev.market.notice.model.dto.NoticeSelectRequestDTO"
+            resultType="com.dev.market.notice.model.vo.NoticeInfoVO">
+        /* 공지사항 테이블에서 제목 글자를 이용해서 아이템 검색 */
+        SELECT TITLE   AS noticeTitle
+             , CONTENT AS noticeContent
+             , OPEN_YN AS openYNEnum
+             , REG_DT  AS regDt
+        FROM TB_NOTICE
+        WHERE TITLE LIKE #{noticeSearching};
+    </select>
+</mapper>

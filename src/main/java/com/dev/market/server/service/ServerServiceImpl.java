@@ -5,7 +5,6 @@ import com.dev.market.server.model.dto.ServerStateInsertRequestDTO;
 import com.dev.market.server.model.dto.ServerStateSelectRequestDTO;
 import com.dev.market.server.model.dto.ServerStateUpdateRequestDTO;
 import com.dev.market.server.model.vo.ServerStateInfoVo;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
