@@ -52,6 +52,6 @@
              , OPEN_YN AS openYNEnum
              , REG_DT  AS regDt
         FROM TB_NOTICE
-        WHERE TITLE LIKE #{noticeSearching};
+        WHERE TITLE LIKE CONCAT('%',#{noticeSearching},'%');
     </select>
 </mapper>

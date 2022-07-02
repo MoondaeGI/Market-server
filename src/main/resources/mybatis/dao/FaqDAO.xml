@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dev.market.faq.model.dao.FaqDAO">
+    <select id="selectFaqInfoList"
+            resultType="com.dev.market.faq.model.vo.FaqInfoVO">
+        SELECT FAQ_NO  AS faqNo
+             , TITLE   AS faqTitle
+             , CONTENT AS faqContent
+             , REG_DT  AS regDt
+        FROM TB_FAQ;
+    </select>
+
+    <select id="selectFaqInfo"
+            parameterType="com.dev.market.faq.model.dto.FaqSelectRequestDTO"
+            resultType="com.dev.market.faq.model.vo.FaqInfoVO">
+        SELECT FAQ_NO  AS faqNo
+             , TITLE   AS faqTitle
+             , CONTENT AS faqContent
+             , REG_DT  AS regDt
+        FROM TB_FAQ
+        WHERE FAQ_NO = #{faqNo};
+    </select>
+
+    <insert id="insertFaqInfo"
+            parameterType="com.dev.market.faq.model.dto.FaqInsertRequestDTO">
+        INSERT INTO TB_FAQ(TITLE, CONTENT, OPEN_YN)
+            VALUE (#{faqTitle}, #{faqContent}, #{openYNEnum});
+    </insert>
+
+    <update id="updateFaqInfo"
+            parameterType="com.dev.market.faq.model.dto.FaqUpdateRequestDTO">
+        UPDATE TB_FAQ
+        SET TITLE = #{faqTitle}
+          , CONTENT = #{faqContent}
+          , OPEN_YN = #{openYNEnum}
+          , MOD_DT = NOW()
+        WHERE FAQ_NO = #{faqNo}
+    </update>
+</mapper>

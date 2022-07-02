@@ -43,7 +43,6 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     public NoticeInfoVO searchNoticeInfoFromTitle(NoticeSelectRequestDTO noticeSelectRequestDTO) {
-        String searchKey = "%" + noticeSelectRequestDTO.getNoticeSearching() + "%";
-        return noticeDAO.searchNoticeInfoFromTitle(searchKey);
+        return noticeDAO.searchNoticeInfoFromTitle(noticeSelectRequestDTO);
     }
 }

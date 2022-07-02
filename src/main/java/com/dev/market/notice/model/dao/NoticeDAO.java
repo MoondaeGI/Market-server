@@ -14,5 +14,5 @@ public interface NoticeDAO {
     NoticeInfoVO selectNoticeInfo(NoticeSelectRequestDTO noticeSelectRequestDTO);
     Integer insertNoticeInfo(NoticeInsertRequestDTO noticeInsertRequestDTO);
     Integer updateNoticeInfo(NoticeUpdateRequestDTO noticeUpdateRequestDTO);
-    NoticeInfoVO searchNoticeInfoFromTitle(String searchKey);
+    NoticeInfoVO searchNoticeInfoFromTitle(NoticeSelectRequestDTO noticeSelectRequestDTO);
 }
