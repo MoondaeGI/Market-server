@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TopCategoryInfoVO {
-    Integer pdCt1No;
-    Integer pdCt1Count;
+public class BottomCategoryInfoVO {
+    Integer pdCt2No;
     String pdCt1Name;
+    String pdCt2Name;
+    UseYNEnum useYNEnum;
     String regDt;
 }

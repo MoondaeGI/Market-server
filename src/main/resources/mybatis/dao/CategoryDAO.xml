@@ -5,11 +5,14 @@
 <mapper namespace="com.dev.market.category.model.dao.CategoryDAO">
     <select id="selectTopCategoryInfoList"
             resultType="com.dev.market.category.model.vo.TopCategoryInfoVO">
-        SELECT PD_CT1_NO AS pdCt1No
-             , NAME AS pdCt1Name
-             , REG_DT AS regDt
-        FROM TB_PD_CT_DEPTH1
-        WHERE USE_YN = 'Y';
+        SELECT PD_CT1_NO                                     AS pdCt1No
+             , (SELECT NAME
+                FROM tb_pd_ct_depth1
+                WHERE PD_CT1_NO = TB_PD_CT_DEPTH2.PD_CT1_NO) AS pdCt1Name
+             , COUNT(PD_CT1_NO)                              AS pdCt1Count
+        FROM TB_PD_CT_DEPTH2
+        WHERE USE_YN = 'Y'
+        GROUP BY PD_CT1_NO;
     </select>
 
     <select id="selectTopCategoryInfo"
@@ -45,4 +48,26 @@
           , USE_YN = #{useYNEnum}
         WHERE PD_CT1_NO = #{pdCt1No};
     </update>
+
+    <select id="selectBottomCategoryInfoList"
+            resultType="com.dev.market.category.model.vo.BottomCategoryInfoVO">
+        SELECT PD_CT2_NO AS pdCt2No
+             , NAME AS pdCt2Name
+             , USE_YN AS useYNEnum
+             , REG_DT AS regDt
+        FROM TB_PD_CT_DEPTH2
+        WHERE USE_YN = 'Y';
+    </select>
+
+    <select id="selectAllCategoryInfoList"
+            resultType="com.dev.market.category.model.vo.BottomCategoryInfoVO">
+        SELECT PD_CT2_NO                                     AS pdCt2No
+             , (SELECT NAME
+                FROM tb_pd_ct_depth1
+                WHERE PD_CT1_NO = TB_PD_CT_DEPTH2.PD_CT1_NO) AS pdCt1Name
+             , NAME                                          AS pdCt2Name
+             , USE_YN                                        AS useYNEnum
+        FROM TB_PD_CT_DEPTH2
+        WHERE USE_YN = 'Y';
+    </select>
 </mapper>

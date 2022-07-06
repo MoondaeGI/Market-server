@@ -4,6 +4,7 @@ import com.dev.market.category.model.dao.CategoryDAO;
 import com.dev.market.category.model.dto.TopCategoryInsertRequestDTO;
 import com.dev.market.category.model.dto.TopCategorySelectRequestDTO;
 import com.dev.market.category.model.dto.TopCategoryUpdateRequestDTO;
+import com.dev.market.category.model.vo.BottomCategoryInfoVO;
 import com.dev.market.category.model.vo.TopCategoryInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,15 @@ public class CategoryServiceImpl implements CategoryService{
         topCategoryInfoVOs.add(updateAndReturnTopCategoryInfo(topCategoryUpdateRequestDTO));
 
         return topCategoryInfoVOs;
+    }
+
+    @Override
+    public List<BottomCategoryInfoVO> selectBottomCategoryInfoList() {
+        return categoryDAO.selectBottomCategoryInfoList();
+    }
+
+    @Override
+    public List<BottomCategoryInfoVO> selectAllCategoryInfoList() {
+        return categoryDAO.selectAllCategoryInfoList();
     }
 }
