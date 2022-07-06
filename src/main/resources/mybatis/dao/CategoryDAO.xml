@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dev.market.category.model.dao.CategoryDAO">
+    <select id="selectTopCategoryInfoList"
+            resultType="com.dev.market.category.model.vo.TopCategoryInfoVO">
+        SELECT PD_CT1_NO AS pdCt1No
+             , NAME AS pdCt1Name
+             , REG_DT AS regDt
+        FROM TB_PD_CT_DEPTH1
+        WHERE USE_YN = 'Y';
+    </select>
+
+    <select id="selectTopCategoryInfo"
+            parameterType="com.dev.market.category.model.dto.TopCategorySelectRequestDTO"
+            resultType="com.dev.market.category.model.vo.TopCategoryInfoVO">
+        SELECT PD_CT1_NO AS pdCt1No
+             , NAME AS pdCt1Name
+             , REG_DT AS regDt
+        FROM TB_PD_CT_DEPTH1
+        WHERE USE_YN = 'Y' AND PD_CT1_NO = #{pdCt1No};
+    </select>
+
+    <select id="selectTopCategoryInfoFromName"
+            parameterType="com.dev.market.category.model.dto.TopCategorySelectRequestDTO"
+            resultType="com.dev.market.category.model.vo.TopCategoryInfoVO">
+        SELECT PD_CT1_NO AS pdCt1No
+             , NAME AS pdCt1Name
+             , REG_DT AS regDt
+        FROM TB_PD_CT_DEPTH1
+        WHERE USE_YN = 'Y' AND NAME LIKE CONCAT('%',#{pdCt1SearchingNameKey},'%');
+    </select>
+
+    <insert id="insertTopCategoryInfo"
+            parameterType="com.dev.market.category.model.dto.TopCategoryInsertRequestDTO">
+        INSERT INTO TB_PD_CT_DEPTH1(NAME)
+            VALUE (#{pdCt1Name});
+    </insert>
+
+    <update id="updateTopCategoryInfo"
+            parameterType="com.dev.market.category.model.dto.TopCategoryUpdateRequestDTO">
+        UPDATE TB_PD_CT_DEPTH1
+        SET NAME = #{pdCt1Name}
+          , USE_YN = #{useYNEnum}
+        WHERE PD_CT1_NO = #{pdCt1No};
+    </update>
+</mapper>

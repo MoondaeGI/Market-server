@@ -7,5 +7,6 @@
         <mapper resource="ServerDAO.xml"/>
         <mapper resource="NoticeDAO.xml"/>
         <mapper resource="FaqDAO.xml"/>
+        <mapper resource="CategoryDAO.xml"/>
     </mappers>
 </configuration>
