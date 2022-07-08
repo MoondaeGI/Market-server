@@ -1,11 +1,10 @@
 package com.dev.market.category.controller;
 
-import com.dev.market.category.model.dto.TopCategoryInsertRequestDTO;
-import com.dev.market.category.model.dto.TopCategorySelectRequestDTO;
-import com.dev.market.category.model.dto.TopCategoryUpdateRequestDTO;
+import com.dev.market.category.model.dto.*;
 import com.dev.market.category.model.vo.BottomCategoryInfoVO;
 import com.dev.market.category.model.vo.TopCategoryInfoVO;
 import com.dev.market.category.service.CategoryService;
+import com.dev.market.category.util.enums.UseYNEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,15 +57,31 @@ public class CategoryController {
         return categoryService.compareUpdateTopCategoryInfo(topCategoryUpdateRequestDTO);
     }
 
-
     @GetMapping("/bottom/info/list")
     public List<BottomCategoryInfoVO> selectBottomCategoryInfoList() {
         return categoryService.selectBottomCategoryInfoList();
+    }
+
+    @PostMapping("bottom/info")
+    public BottomCategoryInfoVO insertAndReturnBottomCategoryInfo(
+            @RequestBody BottomCategoryInsertRequestDTO bottomCategoryInsertRequestDTO) {
+        return categoryService.insertAndReturnBottomCategoryInfo(bottomCategoryInsertRequestDTO);
+    }
+
+    @PutMapping("bottom/info")
+    public Boolean updateBottomCategoryInfo(
+            @RequestBody BottomCategoryUpdateRequestDTO bottomCategoryUpdateRequestDTO) {
+        return categoryService.updateBottomCategoryInfo(bottomCategoryUpdateRequestDTO);
+    }
+
+    @PutMapping("bottom/info/useYn")
+    public UseYNEnum selectAndUpdateBottomCategoryUseYNEnum(
+            @RequestBody BottomCategorySelectRequestDTO bottomCategorySelectRequestDTO) {
+        return categoryService.selectAndUpdateAndReturnBottomCategoryUseYNEnum(bottomCategorySelectRequestDTO);
     }
 
     @GetMapping("all/info/list")
     public List<BottomCategoryInfoVO> selectAllCategoryInfoList() {
         return categoryService.selectAllCategoryInfoList();
     }
-
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BottomCategoryInfoVO {
     Integer pdCt2No;
+    Integer pdCt1No;
     String pdCt1Name;
     String pdCt2Name;
     UseYNEnum useYNEnum;

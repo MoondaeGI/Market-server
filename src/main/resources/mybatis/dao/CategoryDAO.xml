@@ -59,6 +59,39 @@
         WHERE USE_YN = 'Y';
     </select>
 
+    <select id="selectBottomCategoryInfoFromName"
+            resultType="com.dev.market.category.model.vo.BottomCategoryInfoVO"
+            parameterType="com.dev.market.category.model.dto.BottomCategorySelectRequestDTO">
+        SELECT PD_CT2_NO AS pdCt2No
+             , PD_CT1_NO AS pdCt1No
+             , NAME AS pdCt2Name
+             , USE_YN AS useYNEnum
+             , REG_DT AS regDt
+        FROM TB_PD_CT_DEPTH2
+        WHERE NAME = #{pdCt2Name};
+    </select>
+
+    <insert id="insertBottomCategoryInfo"
+            parameterType="com.dev.market.category.model.dto.BottomCategoryInsertRequestDTO">
+        INSERT INTO TB_PD_CT_DEPTH2(NAME, PD_CT1_NO)
+            VALUE (#{pdCt2Name}, #{pdCt1No});
+    </insert>
+
+    <update id="updateBottomCategoryInfo"
+            parameterType="com.dev.market.category.model.dto.BottomCategoryUpdateRequestDTO">
+        UPDATE TB_PD_CT_DEPTH2
+        SET NAME = #{pdCt2Name}
+          , PD_CT1_NO = #{pdCt1No}
+        WHERE PD_CT2_NO = #{pdCt2No};
+    </update>
+
+    <update id="updateBottomCategoryUseYNEnum"
+            parameterType="com.dev.market.category.model.dto.BottomCategoryUpdateRequestDTO">
+        UPDATE TB_PD_CT_DEPTH2
+        SET USE_YN = #{useYNEnum}
+        WHERE NAME = #{pdCt2Name};
+    </update>
+
     <select id="selectAllCategoryInfoList"
             resultType="com.dev.market.category.model.vo.BottomCategoryInfoVO">
         SELECT PD_CT2_NO                                     AS pdCt2No

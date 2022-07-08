@@ -1,11 +1,10 @@
 package com.dev.market.category.service;
 
 import com.dev.market.category.model.dao.CategoryDAO;
-import com.dev.market.category.model.dto.TopCategoryInsertRequestDTO;
-import com.dev.market.category.model.dto.TopCategorySelectRequestDTO;
-import com.dev.market.category.model.dto.TopCategoryUpdateRequestDTO;
+import com.dev.market.category.model.dto.*;
 import com.dev.market.category.model.vo.BottomCategoryInfoVO;
 import com.dev.market.category.model.vo.TopCategoryInfoVO;
+import com.dev.market.category.util.enums.UseYNEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +65,36 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public List<BottomCategoryInfoVO> selectBottomCategoryInfoList() {
         return categoryDAO.selectBottomCategoryInfoList();
+    }
+
+    @Override
+    public Boolean updateBottomCategoryInfo(BottomCategoryUpdateRequestDTO bottomCategoryUpdateRequestDTO) {
+        return categoryDAO.updateBottomCategoryInfo(bottomCategoryUpdateRequestDTO) == 1;
+    }
+
+    @Override
+    public BottomCategoryInfoVO insertAndReturnBottomCategoryInfo(BottomCategoryInsertRequestDTO bottomCategoryInsertRequestDTO) {
+        BottomCategorySelectRequestDTO bottomCategorySelectRequestDTO = new BottomCategorySelectRequestDTO();
+
+        categoryDAO.insertBottomCategoryInfo(bottomCategoryInsertRequestDTO);
+        bottomCategorySelectRequestDTO.setPdCt2Name(bottomCategoryInsertRequestDTO.getPdCt2Name());
+
+        return categoryDAO.selectBottomCategoryInfoFromName(bottomCategorySelectRequestDTO);
+    }
+
+    @Override
+    public UseYNEnum selectAndUpdateAndReturnBottomCategoryUseYNEnum(BottomCategorySelectRequestDTO bottomCategorySelectRequestDTO) {
+        BottomCategoryUpdateRequestDTO bottomCategoryUpdateRequestDTO = new BottomCategoryUpdateRequestDTO();
+        String pdCt2Name = bottomCategorySelectRequestDTO.getPdCt2Name();
+        UseYNEnum useYNEnum = categoryDAO.selectBottomCategoryInfoFromName(bottomCategorySelectRequestDTO).getUseYNEnum();
+
+        UseYNEnum updateUseYNEnum = (useYNEnum == UseYNEnum.Y) ? UseYNEnum.valueOf("Y") : UseYNEnum.valueOf("N");
+
+        bottomCategoryUpdateRequestDTO.setPdCt2Name(pdCt2Name);
+        bottomCategoryUpdateRequestDTO.setUseYNEnum(updateUseYNEnum);
+        categoryDAO.updateBottomCategoryUseYNEnum(bottomCategoryUpdateRequestDTO);
+
+        return updateUseYNEnum;
     }
 
     @Override
