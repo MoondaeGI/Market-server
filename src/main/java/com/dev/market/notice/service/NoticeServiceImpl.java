@@ -2,6 +2,7 @@ package com.dev.market.notice.service;
 
 import com.dev.market.notice.model.dao.NoticeDAO;
 import com.dev.market.notice.model.dto.NoticeInsertRequestDTO;
+import com.dev.market.notice.model.dto.NoticeSelectFromSKRequestDTO;
 import com.dev.market.notice.model.dto.NoticeSelectRequestDTO;
 import com.dev.market.notice.model.dto.NoticeUpdateRequestDTO;
 import com.dev.market.notice.model.vo.NoticeInfoVO;
@@ -42,7 +43,7 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public NoticeInfoVO searchNoticeInfoFromTitle(NoticeSelectRequestDTO noticeSelectRequestDTO) {
-        return noticeDAO.searchNoticeInfoFromTitle(noticeSelectRequestDTO);
+    public NoticeInfoVO searchNoticeInfoFromTitle(NoticeSelectFromSKRequestDTO noticeSelectFromSKRequestDTO) {
+        return noticeDAO.searchNoticeInfoFromTitle(noticeSelectFromSKRequestDTO);
     }
 }

@@ -16,7 +16,7 @@
     </select>
 
     <select id="selectTopCategoryInfo"
-            parameterType="com.dev.market.category.model.dto.TopCategorySelectRequestDTO"
+            parameterType="com.dev.market.category.model.dto.topCategoryRequestDTO.TopCategorySelectRequestDTO"
             resultType="com.dev.market.category.model.vo.TopCategoryInfoVO">
         SELECT PD_CT1_NO AS pdCt1No
              , NAME AS pdCt1Name
@@ -26,7 +26,7 @@
     </select>
 
     <select id="selectTopCategoryInfoFromName"
-            parameterType="com.dev.market.category.model.dto.TopCategorySelectRequestDTO"
+            parameterType="com.dev.market.category.model.dto.topCategoryRequestDTO.TopCategorySelectRequestDTO"
             resultType="com.dev.market.category.model.vo.TopCategoryInfoVO">
         SELECT PD_CT1_NO AS pdCt1No
              , NAME AS pdCt1Name
@@ -36,13 +36,13 @@
     </select>
 
     <insert id="insertTopCategoryInfo"
-            parameterType="com.dev.market.category.model.dto.TopCategoryInsertRequestDTO">
+            parameterType="com.dev.market.category.model.dto.topCategoryRequestDTO.TopCategoryInsertRequestDTO">
         INSERT INTO TB_PD_CT_DEPTH1(NAME)
             VALUE (#{pdCt1Name});
     </insert>
 
     <update id="updateTopCategoryInfo"
-            parameterType="com.dev.market.category.model.dto.TopCategoryUpdateRequestDTO">
+            parameterType="com.dev.market.category.model.dto.topCategoryRequestDTO.TopCategoryUpdateRequestDTO">
         UPDATE TB_PD_CT_DEPTH1
         SET NAME = #{pdCt1Name}
           , USE_YN = #{useYNEnum}
@@ -61,7 +61,7 @@
 
     <select id="selectBottomCategoryInfoFromName"
             resultType="com.dev.market.category.model.vo.BottomCategoryInfoVO"
-            parameterType="com.dev.market.category.model.dto.BottomCategorySelectRequestDTO">
+            parameterType="com.dev.market.category.model.dto.bottomCategoryRequestDTO.BottomCategorySelectRequestDTO">
         SELECT PD_CT2_NO AS pdCt2No
              , PD_CT1_NO AS pdCt1No
              , NAME AS pdCt2Name
@@ -72,13 +72,13 @@
     </select>
 
     <insert id="insertBottomCategoryInfo"
-            parameterType="com.dev.market.category.model.dto.BottomCategoryInsertRequestDTO">
+            parameterType="com.dev.market.category.model.dto.bottomCategoryRequestDTO.BottomCategoryInsertRequestDTO">
         INSERT INTO TB_PD_CT_DEPTH2(NAME, PD_CT1_NO)
             VALUE (#{pdCt2Name}, #{pdCt1No});
     </insert>
 
     <update id="updateBottomCategoryInfo"
-            parameterType="com.dev.market.category.model.dto.BottomCategoryUpdateRequestDTO">
+            parameterType="com.dev.market.category.model.dto.bottomCategoryRequestDTO.BottomCategoryUpdateRequestDTO">
         UPDATE TB_PD_CT_DEPTH2
         SET NAME = #{pdCt2Name}
           , PD_CT1_NO = #{pdCt1No}
@@ -86,7 +86,7 @@
     </update>
 
     <update id="updateBottomCategoryUseYNEnum"
-            parameterType="com.dev.market.category.model.dto.BottomCategoryUpdateRequestDTO">
+            parameterType="com.dev.market.category.model.dto.bottomCategoryRequestDTO.BottomCategoryUpdateRequestDTO">
         UPDATE TB_PD_CT_DEPTH2
         SET USE_YN = #{useYNEnum}
         WHERE NAME = #{pdCt2Name};

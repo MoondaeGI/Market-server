@@ -1,4 +1,4 @@
-package com.dev.market.category.model.dto;
+package com.dev.market.category.model.dto.topCategoryRequestDTO;
 
 import lombok.Data;
 

@@ -1,6 +1,7 @@
 package com.dev.market.notice.model.dao;
 
 import com.dev.market.notice.model.dto.NoticeInsertRequestDTO;
+import com.dev.market.notice.model.dto.NoticeSelectFromSKRequestDTO;
 import com.dev.market.notice.model.dto.NoticeSelectRequestDTO;
 import com.dev.market.notice.model.dto.NoticeUpdateRequestDTO;
 import com.dev.market.notice.model.vo.NoticeInfoVO;
@@ -14,5 +15,5 @@ public interface NoticeDAO {
     NoticeInfoVO selectNoticeInfo(NoticeSelectRequestDTO noticeSelectRequestDTO);
     Integer insertNoticeInfo(NoticeInsertRequestDTO noticeInsertRequestDTO);
     Integer updateNoticeInfo(NoticeUpdateRequestDTO noticeUpdateRequestDTO);
-    NoticeInfoVO searchNoticeInfoFromTitle(NoticeSelectRequestDTO noticeSelectRequestDTO);
+    NoticeInfoVO searchNoticeInfoFromTitle(NoticeSelectFromSKRequestDTO noticeSelectFromSKRequestDTO);
 }

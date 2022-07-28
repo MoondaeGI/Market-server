@@ -1,6 +1,11 @@
 package com.dev.market.category.controller;
 
-import com.dev.market.category.model.dto.*;
+import com.dev.market.category.model.dto.bottomCategoryRequestDTO.BottomCategoryInsertRequestDTO;
+import com.dev.market.category.model.dto.bottomCategoryRequestDTO.BottomCategorySelectRequestDTO;
+import com.dev.market.category.model.dto.bottomCategoryRequestDTO.BottomCategoryUpdateRequestDTO;
+import com.dev.market.category.model.dto.topCategoryRequestDTO.TopCategoryInsertRequestDTO;
+import com.dev.market.category.model.dto.topCategoryRequestDTO.TopCategorySelectRequestDTO;
+import com.dev.market.category.model.dto.topCategoryRequestDTO.TopCategoryUpdateRequestDTO;
 import com.dev.market.category.model.vo.BottomCategoryInfoVO;
 import com.dev.market.category.model.vo.TopCategoryInfoVO;
 import com.dev.market.category.service.CategoryService;
